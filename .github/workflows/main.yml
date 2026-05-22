@@ -20,5 +20,5 @@ jobs:
             - name: run tests
               env:
                 REPOSITORY_VARIABLE: ${{vars.REPOSITORY_VARIABLE}}
-              run: ${REPOSITORY_VARIABLE}
+              run: $REPOSITORY_VARIABLE
                 
