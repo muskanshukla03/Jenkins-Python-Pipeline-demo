@@ -1,0 +1,45 @@
+name: Variables
+on:
+    push:
+env:  # Define environment variables that can be used across all jobs and steps
+    Python_Version: 3.9
+jobs:
+    job1:
+     runs-on: ubuntu-latest
+     steps:
+        - name: Checkout Code
+          uses: actions/checkout@v6
+        - name: Set up Python
+          uses: actions/setup-python@v4
+          with:
+                python-version: ${{ env.Python_Version }}
+        - name: Name of python version
+          run : echo "Python version is ${{ env.Python_Version }}"
+    job2:
+     runs-on: ubuntu-latest
+     env:  # Define environment variables specific to this job
+        Myjob-variable: 18
+     steps:
+        - name: Checkout Code
+          uses: actions/checkout@v6
+        - name: Set up Python
+          uses: actions/setup-python@v4
+          with:
+                python-version: ${{ env.Myjob-variable }}
+        - name: Name of python version  
+          run : echo "Python version is ${{ env.Myjob-variable }}"
+    job3:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v6
+            - name: Set up Python
+              env:  # Define environment variables specific to this step
+                MyStep-variable: 3.10
+              uses: actions/setup-python@v4
+              with:
+                    python-version: ${{ env.MyStep-variable }}
+            - name: Name of python version
+              env:
+                Application: Python
+              run : echo "Python version is ${{ env.Application }}"
